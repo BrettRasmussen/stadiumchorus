@@ -1,0 +1,28 @@
+<h2>Sign Up</h2>
+
+<!--
+<p style="color: red">NOTE: We have reached our quota for membership in the
+Stadium Choir.  We will, however, be maintaining a list of alternates in
+case some of the current members need to drop out for whatever reason.
+Please feel free to sign up if you would like to be on the waiting list or
+if you would like to be considered for this opportunity in the future.</p>
+-->
+
+<% if flash[:error] %>
+  <div id="error-message"><%= flash[:error] %></div>
+<% end %>
+
+<form action="/do_signup" method="post">
+  <table id="signup-form">
+    <%= @form.as_table %>
+  </table>
+
+  <font color="red"><em>Please hit this button <b>only once</b>
+  (it might take a minute)</em></font><br>
+  <input type="submit" value="Sign Me Up" />
+
+  <br><br>
+  <p class="notice">NOTE: If anthing goes wrong with the form submission, please email
+  stadium<foo>choir<foo>@<foo>twoedge<foo>.<foo>com with a precise
+  description of what happened.</p>
+</form>

@@ -1,0 +1,7 @@
+development:
+  adapter: 'sqlite3'
+  dbfile: 'db/development.sl3'
+
+production:
+  adapter: 'sqlite3'
+  dbfile: 'db/production.sl3'

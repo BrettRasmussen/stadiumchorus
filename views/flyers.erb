@@ -1,0 +1,25 @@
+<h2>Flyers</h2>
+
+<p>Here are some flyers that you can use for recruiting purposes.</p>
+
+<p>The ones with "_sm" in the filename are small and in a lower resolution,
+suitable for emailing to others to view them on-screen.  The others are
+higher resolution for printing.  The ones with the "_4" in the file name
+have 4 per page, so they're more useful for printing if you want something
+to cut up and hand out.</p>
+
+<%
+  flyers = %w[
+    stadium_of_fire_choir_flyer_sawtooth.png
+    stadium_of_fire_choir_flyer_sawtooth_sm.png
+    stadium_of_fire_choir_flyer_sawtooth_4.png
+    stadium_of_fire_choir_flyer_solid.png
+    stadium_of_fire_choir_flyer_solid_sm.png
+    stadium_of_fire_choir_flyer_solid_4.png
+  ]
+%>
+<ul>
+  <% flyers.each do |flyer| %>
+    <li><a href="/images/flyers/<%= flyer %>"><%= flyer %></a>
+  <% end %>
+</ul>

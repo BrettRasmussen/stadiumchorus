@@ -1,0 +1,339 @@
+/*-------------------------------------------------------------------
+Default Freedom Festival Styles
+By:Bermon Painter | bermonpainter.com
+-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------
+CSS RESET
+-------------------------------------------------------------------*/
+html,body,div,span,applet,object,iframe,
+h1,h2,h3,h4,h5,h6,p,blockquote,pre,
+a,abbr,acronym,address,big,cite,code,
+del,dfn,em,font,img,ins,kbd,q,s,samp,
+small,strike,strong,sub,sup,tt,var,
+dl,dt,dd,ol,ul,li,
+fieldset,form,label,legend,
+table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:1em;font-family:inherit;vertical-align:baseline;}
+/* remember to define focus styles! */
+:focus{outline:0;}
+body{line-height:1;color:black;background:white;}
+ol,ul{list-style:none;}
+/* tables still need 'cellspacing="0"' in the markup */
+table{border-collapse:separate;border-spacing:0;}
+caption,th,td{text-align:left;font-weight:normal;}
+blockquote:before,blockquote:after,
+q:before,q:after{content:"";}
+blockquote,q{quotes:"" "";}
+/*-------------------------------------------------------------------
+GENERAL STYLES
+-------------------------------------------------------------------*/
+html{background:#022156 url('/images/new/background.jpg') no-repeat top center;font:10px Arial,Helvetica,Sans-serif;}
+body{background:transparent url('/images/new/background_top.png') repeat-x scroll top left;}
+#selector{width:1px;height:4px;}
+a{color:#e4442f;text-decoration:none;}
+a:hover{color:#00225d;}
+a:visited{color:#cd2e19;}
+h1{color:#00225d;font:3em Georgia,"Times New Roman",Times;}
+h2{color:#00225d;font:2em Georgia,"Times New Roman",Times;margin:30px 0 10px;}
+h3,legend{color:#00225d;font:1.4em Georgia,"Times New Roman",Times;margin:30px 0 10px;}
+legend{border-bottom:1px solid #e5e5e5;margin-bottom:10px;padding-bottom:5px;width:100%;}
+li{margin-bottom:10px;}
+#rendered-content{clear:both;font-size:1.3em;line-height:1.4em;margin:20px 0;}
+#rendered-content p{font-size:1.3em;margin-bottom:10px;}
+#rendered-content ul{font-size:1.3em;list-style:outside disc;margin-left:20px;}
+#rendered-content ol{list-style:outside decimal;margin-left:20px;}
+#rendered-content ol li{margin-bottom:10px;}
+#rendered-content table{margin:20px 0;width:100%;}
+#rendered-content table td,
+#rendered-content table th{padding:10px 5px;vertical-align:top}
+#rendered-content table th{font-size:1.2em;font-weight:bold;}
+#rendered-content table tr th.date{width:100px;}
+#rendered-content table tr td,
+#rendered-content table tr th{border-bottom:1px solid #e5e5e5;}
+#rendered-content table tr.odd{background-color:#fcfcfc;}
+#rendered-content table tr td{font-size:1em;}
+#rendered-content table tr td span{display:block;}
+form{font-size:1.1em;margin-top:20px;}
+form label{display:block;font-weight:bold;margin-left:2px;}
+form label span{color:red;font-size:.8em;font-weight:normal;}
+form input{border:1px solid #ccc;font-size:1.2em;margin-bottom:10px;padding:5px;width:250px;}
+form select{width:260px;margin-bottom:10px;}
+form input:focus{background-color:#feedc5;}
+form textarea{border:1px solid #ccc;font-size:1.2em;margin-bottom:10px;min-height:200px;padding:5px;width:450px;}
+ul.checkboxes{margin-top:10px;}
+ul.checkboxes li{clear:both;margin-bottom:-15px;}
+ul.checkboxes li input{border:0px;position:relative;top:-15px;}
+ul.checkboxes li label{margin-left:23px;}
+ul.radio-buttons{margin-top:10px;}
+ul.radio-buttons li{clear:both;margin-bottom:-15px;}
+ul.radio-buttons li input{border:0px;position:relative;top:-15px;}
+ul.radio-buttons li label{margin-left:23px;}
+em{font-style:italic;}
+strong{font-weight:bold;}
+/*-------------------------------------------------------------------
+CLEARFIX - FLOATING FIX
+-------------------------------------------------------------------*/
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-block;}
+* html .clearfix{height:1%;}
+.clearfix{display:block;}
+/*-------------------------------------------------------------------
+CONTAINER
+-------------------------------------------------------------------*/ 
+#container{margin:0 auto;width:980px;}
+/*-------------------------------------------------------------------
+HEADER
+-------------------------------------------------------------------*/
+#logo{background-image:url('/images/new/aff_logo.png');display:block;float:left;height:126px;margin:10px 0 0 80px;text-indent:-9999px;width:252px;}
+/*-------------------------------------------------------------------
+SECONDARY NAV
+-------------------------------------------------------------------*/
+#secondary-nav{float:right;margin:40px 45px 20px 0;}
+#secondary-nav li{float:left;}
+#secondary-nav a{background:url('/images/new/secondary_icons.png') no-repeat 0 0;color:#bac3d0;display:block;font-size:1.1em;padding:5px 10px 5px 25px;}
+#secondary-nav a:hover{color:#fff;}
+#secondary-nav .about a{background-position:0 .5em;}
+#secondary-nav .press a{background-position:-88px .5em;}
+#secondary-nav .contact a{background-position:-190px .5em;}
+/*-------------------------------------------------------------------
+MAIN NAV
+-------------------------------------------------------------------*/
+#main-nav{clear:right;float:right;margin-right:15px;}
+#main-nav li{float:left;}
+#main-nav a{background:url('/images/new/primary_nav.png') no-repeat 0 0;display:block;height:57px;text-indent:-9999px;}
+#main-nav .home a{background-position:0 0;width:100px;}
+#main-nav .events a{background-position:-100px 0;width:92px;}
+#main-nav .volunteer a{background-position:-192px 0;width:142px;}
+#main-nav .vendors a{background-position:top right;width:124px;}
+/*-------------------------------------------------------------------
+SOF LOGO
+-------------------------------------------------------------------*/
+#sof-logo{float:right;margin:40px 45px 20px 0;width:328px;height:92px;background:url('/images/sof_logo.png') no-repeat;display:block;text-indent:-9999px;}
+/*-------------------------------------------------------------------
+CONTENT
+-------------------------------------------------------------------*/
+#content{background:#012055 url('/images/new/content_background_top.png') repeat-x top left;clear:both;padding:0 10px;width:960px;}
+/*-------------------------------------------------------------------
+SLIDER
+-------------------------------------------------------------------*/
+#slider{background-color:#000;float:left;height:327px;width:610px;}
+/* base styles for the content */
+#slider h1,
+#slider h2{position:absolute;text-indent:-9999px;}
+#slider-wrap{clear:both;float:left;position:relative;width:610px;}
+/* the main slider navigation */
+.stripNav{margin:auto;position:absolute;left:0px;bottom:0px;z-index:1000;}
+.stripNav ul{list-style:none;}
+.stripNav ul li{float:left;}
+.stripNav a{background:url('/images/new/promo_background_nav.png') top left no-repeat;color:#fff;display:block;font-size:1.1em;font-weight:bold;height:80px;line-height:105px;text-align:center;text-transform:uppercase;width:203px;}
+.stripNav .tab1 a{background-position:0 -1px;width:204px;}
+.stripNav .tab2 a{background-position:-204px -1px;}
+.stripNav .tab3 a{background-position:-407px -1px;}
+.stripNav .tab1 a.current{background-position:0 -82px;}
+.stripNav .tab2 a.current{background-position:-204px -82px;}
+.stripNav .tab3 a.current{background-position:-407px -82px;}
+/* These 2 lines specify style applied while slider is loading */
+.csw{width:100%;height:327px;background:#000;overflow:scroll}
+.csw .loading{margin:200px 0 300px 0;text-align:center}
+/* slider container */
+.stripViewer{clear:both;height:327px;margin:auto;overflow:hidden;position:relative;width:610px;}
+.stripViewer .panelContainer{left:0;top:0;list-style-type:none;position:relative;width:100%;}
+.stripViewer .panelContainer .panel{float:left;height:100%;position:relative;width:610px;/* Also specified in .stripViewer above */}
+.stripViewer .panelContainer .panel .wrapper{height:327px;}
+/* arrow nav */
+.stripNavL a,.stripNavR a{display:none;}
+/*-------------------------------------------------------------------
+UPCOMING EVENTS
+-------------------------------------------------------------------*/
+#upcoming-events{background:#333 url('/images/new/upcoming_events_background.jpg') no-repeat top left;float:right;font-size:1.2em;height:327px;width:350px;}
+#upcoming-events h2{text-indent:-9999px;}
+#upcoming-events a{color:#fff;display:block;font-weight:bold;}
+#upcoming-events table{margin:20px auto 20px;width:310px;}
+#upcoming-events table td{padding:8px;}
+#upcoming-events table .even{background-image:url('/images/new/table_background.png');}
+#upcoming-events table .right{text-align:right;}
+#upcoming-events table .right a{font-weight:normal;}
+#upcoming-events a.star-icon{background:url('/images/new/star_icon.png') no-repeat top right;float:right;margin-right:25px;padding:3px 25px 3px 0;}
+/*-------------------------------------------------------------------
+MAIN
+-------------------------------------------------------------------*/
+#main{clear:both;min-height:300px;padding:10px;}
+#sponsors{clear:both;margin-bottom:0px;}
+/*-------------------------------------------------------------------
+FOOTER
+-------------------------------------------------------------------*/
+#footer{background:transparent url('/images/new/content_background_bottom.png') repeat-x top left;min-height:90px;padding:20px 10px;}
+#footer ul{float:left;}
+#footer ul li{border-left:1px solid #fff;float:left;}
+#footer ul li a{color:#fff;display:block;padding:2px 8px;}
+#footer ul li:first-child{border:0px;}
+#footer ul li:first-child a{padding-left:0px;}
+#footer p{color:#fff;padding:2px 0;float:right;}
+/*-------------------------------------------------------------------
+LAYOUTS
+-------------------------------------------------------------------*/
+.three-columns{background:#eaeaea url('/images/new/background_single_column.png') repeat-x 0 0;}
+.three-columns .column-1,
+.three-columns .column-2,
+.three-columns .column-3{width:300px;}
+.three-columns .column-1{float:left;}
+.three-columns .column-2{float:left;margin-left:20px;}
+.three-columns .column-3{float:right;}
+#main.two-columns{background:#fff url('/images/new/background_two_column.png') repeat-y top right;padding:0;}
+.two-columns .column-1{float:left;padding:10px;width:590px;}
+.two-columns .column-2{background:url('/images/new/background_two_column_top.png') no-repeat 0 -1px;float:right;padding:10px;width:330px;min-height:500px;}
+.single-column{background:#fff;}
+/*-------------------------------------------------------------------
+EVENTS
+-------------------------------------------------------------------*/
+#events table th.name{width:150px;}
+#events table th.date{width:100px;}
+#events #event-footer{border-top:1px solid #e5e5e5;font-size:1.1em;margin-top:10px;padding-top:10px;}
+#events #event-footer div{float:left;line-height:1.4em;padding-right:10px;width:186px;}
+#events #event-footer h5{font-weight:bold;margin-bottom:10px;}
+/*-------------------------------------------------------------------
+OTHER NAV - IN COLUMN 2
+-------------------------------------------------------------------*/
+#other-nav{font-size:1.2em;padding:10px;}
+#other-nav ul{border:2px solid #efefef;padding:2px 10px;}
+#other-nav ul li a{border-top:1px solid #e5e5e5;display:block;padding:8px;}
+#other-nav ul li:first-child a{border-top:0px;}
+/*-------------------------------------------------------------------
+CONTACT
+-------------------------------------------------------------------*/
+#contact #rendered-info{float:left;width:220px;}
+#contact form{float:right;margin-top:0;width:360px;}
+#contact form textarea{width:345px;}
+/*-------------------------------------------------------------------
+MEDIA REGISTRATION
+-------------------------------------------------------------------*/
+#media-app fieldset{padding:15px 0 40px;}
+#media-app fieldset .col-1{float:left;width:290px;}
+#media-app fieldset .col-2{float:right;width:290px;}
+#media-app .note{clear:both;display:block;}
+#media-app .disclaimer{color:#333;text-align:center;}
+/*-------------------------------------------------------------------
+MODULES
+-------------------------------------------------------------------*/
+.standard-container{background-color:#fff;margin-bottom:20px;padding:10px;}
+.standard-container div{border:1px solid #efefef;margin:0 auto;padding:15px;}
+.standard-container h2{font-size:1.6em;margin:0;text-align:center;}
+.standard-container h1{font-size:3.2em;margin:0;text-align:center;}
+#module_sof div{padding:0;}
+#module_photo_contest div{min-height:220px;}
+#module_photo_contest a{display:block;margin:10px auto -15px;}
+#module_email_signup div{min-height:74px;}
+#module_email_signup p{text-align:center;}
+#module_email_signup input{float:left;margin:0;width:140px;}
+.column-2 #module_email_signup input{width:170px;}
+#module_email_signup button,
+#module_email_signup a{background-image:url('/images/button_module_emailme.png');border:0px;cursor:pointer;float:right;height:30px;width:91px;}
+#module_email_signup a{display:block;float:none;margin:27px auto 0;text-indent:-9999px;}
+#module_email_signup button span{display:block;text-indent:-9999px;}
+#module_donate div{min-height:45px;}
+#module-upcoming-events table{margin-top:20px;}
+#module-upcoming-events table{margin-top:20px;width:100%;}
+#module-upcoming-events table td,
+#module-upcoming-events table th{padding:10px 5px;}
+#module-upcoming-events table th{font-size:1.2em;font-weight:bold;}
+#module-upcoming-events table tr th.date{width:100px;}
+#module-upcoming-events table tr td,
+#module-upcoming-events table tr th{border-bottom:1px solid #e5e5e5;}
+#module-upcoming-events table tr.odd{background-color:#efefef;}
+#module-upcoming-events table tr td{font-size:1em;}
+#module-upcoming-events table tr td span{display:block;}
+#module-upcoming-events table tr td.right{text-align:right;}
+#module-upcoming-events .button{background-image:url('../images/button_view_all_events.png');display:block;height:30px;margin:15px auto 0;text-indent:-9999px;width:125px;}
+/*-------------------------------------------------------------------
+SPONSOR LOGOS
+-------------------------------------------------------------------*/
+#sponsors{margin:0 16px 15px;}
+#sponsors a{background-image:url('/images/sponsor_logos.png');display:block;float:left;margin-right:55px;height:47px;text-indent:-9999px;}
+#sponsors a.zions-bank{background-position:0 0;width:118px;}
+#sponsors a.utah-valley{background-position:-152px 0;width:95px;}
+#sponsors a.nuskin{background-position:-256px 0;width:120px;}
+#sponsors a.daily-herald{background-position:-395px 0;width:120px;}
+#sponsors a.utah-county{background-position:-539px 0;width:46px;}
+#sponsors a.provo{background-position:-605px 0;width:120px;float:right;margin-right:0;}
+#sponsors a.zions-bank:hover{background-position:0 -51px;}
+#sponsors a.utah-valley:hover{background-position:-152px -51px;}
+#sponsors a.nuskin:hover{background-position:-256px -51px;}
+#sponsors a.daily-herald:hover{background-position:-395px -51px;}
+#sponsors a.utah-county:hover{background-position:-539px -51px;}
+#sponsors a.provo:hover{background-position:-605px -51px;}
+a.all-sponsors{color:#999;display:block;font-size:.9em;text-align:center;text-transform:uppercase;}
+a.all-sponsors:hover{color:#00225d;}
+/*-------------------------------------------------------------------
+SPONSOR LINKS
+-------------------------------------------------------------------*/
+#sponsor-links ul{list-style:none;margin:0;padding:0;}
+#sponsor-links ul li{border-top:1px solid #efefef;padding:5px 0;}
+#sponsor-links ul li:first-child{border:none;}
+/*-------------------------------------------------------------------
+DONATE
+-------------------------------------------------------------------*/
+#donate button{background-image:url('/images/button_donate.png');border:0px;cursor:pointer;display:block;height:30px;width:84px;}
+#donate button span{display:block;text-indent:-9999px;}
+/*-------------------------------------------------------------------
+FLASH MESSAGES
+-------------------------------------------------------------------*/
+#thankyou-message{color:#00c02d;clear:both;margin:20px;text-align:center;}
+#thankyou-message h5{font-size:2.6em;}
+#thankyou-message p{font-size:1.8em;}
+#error-message{color:#c00000;clear:both;margin:20px;text-align:center;}
+#error-message h5{font-size:2.6em;}
+#error-message p{font-size:1.8em;}
+#error-message{color:#c00000;clear:both;margin:20px;text-align:center;}
+ul.errorlist li{color:#c00000;font-size:0.7em;}
+/*-------------------------------------------------------------------
+NOTICES
+-------------------------------------------------------------------*/
+#rendered-content p.notice {font-size:0.7em;}
+/*-------------------------------------------------------------------
+STADIUM OF FIRE
+-------------------------------------------------------------------*/
+#sof{background-color:#000;}
+#sof .header{background:url('/images/jonas_bros_background.jpg') no-repeat top left;height:664px;padding-top:20px;width:960px;}
+#sof .header .logo{background-image:url('/images/jonas_brothers_sof_logo_usl_sponsor.png');width:331px;height:138px;margin:20px 0 0 560px;text-indent:-9999px;}
+#sof .header .info-box{font:bold 10pt Tahoma,"Lucida Grande",Verdana,Arial,Sans-serif;height:400px;margin:50px 0 0 578px;text-align:center;width:300px;}
+#sof .header .info-box .line{background-image:url('/images/jonas_brothers_line.png');border:0px;height:33px;margin:15px 0 10px -4px;width:314px;}
+#sof .header .info-box h1,
+#sof .header .info-box h2,
+#sof .header .info-box h3,
+#sof .header .info-box h4,
+#sof .header .info-box h5,
+#sof .header .info-box h6,
+#sof .header .info-box p,
+#sof .header .info-box ul{color:#fff;font-family:Tahoma,"Lucida Grande",Verdana,Arial,Sans-serif;font-weight:bold;margin:0;padding:0;text-shadow:0px 0px 3px #000;text-transform:uppercase;}
+#sof .header .info-box h1{font-size:1.7em;margin-bottom:5px;}
+#sof .header .info-box h2{font-size:.9em;}
+#sof .header .info-box h3{font-size:1.2em;}
+#sof .header .info-box .ticket-prices{margin:5px 0 0 6px;}
+#sof .header .info-box .ticket-prices li{background:url('/images/jonas_brothers_separator.png') no-repeat top left;float:left;font-size:1.4em;padding:0 10px 0 13px;}
+#sof .header .info-box .ticket-prices li:first-child{background-image:none;padding-left:0px;}
+#sof .header .info-box .ticket-prices li:last-child{padding-right:0px;}
+#sof .header .info-box h4{clear:both;font-size:.7em;padding-top:5px;}
+#sof .header .info-box .button{background-image:url('/images/jonas_brothers_button.png');clear:both;color:#fff;cursor:pointer;display:block;height:73px;font-size:1.35em;line-height:67px;margin:30px auto 15px;text-indent:4px;text-shadow:0px 0px 1px #000;text-transform:uppercase;width:268px;}
+#sof .header .info-box h5{font-size:.9em;margin-bottom:30px;}
+#sof .header .info-box h5 a{color:#fff;text-decoration:underline;}
+#sof .header .info-box p{font-size:.75em;text-transform:none;}
+#sof .header .info-box p a{color:#fff;text-decoration:underline;}
+#sof .header .info-box a:hover{text-decoration:none;}
+#sof #secondary{margin:20px auto;width:825px;}
+#sof #secondary .col1{background-image:url('/images/jonas_brothers_second_act.jpg');float:left;height:294px;width:427px;}
+#sof #secondary .col2{float:right;}
+#sof #sponsors{margin:50px auto;width: 825px;}
+#sof #sponsors a{background-image:url('/images/sof_2009_sponsors.png');background-position: 0 -83px;height:58px;margin-right:35px;}
+#sof #sponsors a.toyota{background-position: 0 -77px;width:85px;}
+#sof #sponsors a:hover.toyota{background-position: 0 0;}
+#sof #sponsors a.utah-valley{background-position: -118px -77px;width:122px;}
+#sof #sponsors a:hover.utah-valley{background-position: -118px 0;}
+#sof #sponsors a.knrs{background-position: -282px -77px;width:60px;}
+#sof #sponsors a:hover.knrs{background-position: -282px 0;}
+#sof #sponsors a.knrs{background-position: -282px -77px;width:60px;}
+#sof #sponsors a:hover.knrs{background-position: -282px 0;}
+#sof #sponsors a.daily-herald{background-position: -381px -77px;width:159px;}
+#sof #sponsors a:hover.daily-herald{background-position: -381px 0;}
+#sof #sponsors a.provo{background-position: -570px -77px;width:123px;float:left;margin-right:35px;}
+#sof #sponsors a:hover.provo{background-position: -570px 0;}
+#sof #sponsors a.radio-disney{background-position: -735px -77px;width:91px;float:right;margin-right:0;}
+#sof #sponsors a:hover.radio-disney{background-position: -735px 0;}
