@@ -96,7 +96,7 @@ post '/do_signup' do
     singer_data[col.to_sym] = val if val
   end
   @form = SignupForm.new(singer_data)
-  begin
+  output = begin
     b_day = Date.parse(singer_data[:birthdate]) rescue nil
     if b_day.nil? || !(Date.today.year - b_day.year).between?(1, 120)
       @form.errors[:birthdate] = "Needs to be a valid date (including 4-digit year)"
@@ -120,6 +120,12 @@ post '/do_signup' do
     EOS
     erb :signup
   end
+  if ENV['RACK_ENV'] == 'production'
+    if fork.nil?
+      %x{scp -P 202 db/production.sl3 twoedge.dyndns.org:wk/stadiumchorus/stadiumchorus/db/} rescue nil
+    end
+  end
+  output
 end
 
 get /\/(\w+)$/ do |tpl|
