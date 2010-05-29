@@ -1,0 +1,37 @@
+<h2>Singer Count</h2>
+<div>
+  Unique: <%= @singers.size - @email_dupes.size %><br>
+  Total: <%= @singers.size %>
+</div>
+
+<div>
+  <br>
+  <% @voiceparts.each do |vp| %>
+    <%= vp[:value] %>: <%= @part_counts[vp[:value]] %><br>
+  <% end %>
+</div>
+
+<div>
+  <h2>Singer List</h2>
+
+  <table border="1">
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>email</th>
+      <th>phone</th>
+      <th>voice part</th>
+    </tr>
+    <% @singers.each do |singer| %>
+      <tr>
+        <td><%= singer.id %></td>
+        <td><%= singer.last_name %> <%= singer.first_name %></td>
+        <td><%= singer.age %></td>
+        <td><%= singer.email %></td>
+        <td><%= singer.phone %></td>
+        <td><%= singer.voicepart %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -17,7 +17,24 @@ ActiveRecord::Base.establish_connection(
 )
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
-class Singer < ActiveRecord::Base; end
+class Singer < ActiveRecord::Base;
+  def age
+    age = Date.today.year - birthdate.year
+    age -= 1 if Date.today.yday < birthdate.yday
+    age
+  end
+end
+
+VOICEPARTS = [
+  {:value => 's1', :display => 'Soprano I'},
+  {:value => 's2', :display => 'Soprano II'},
+  {:value => 'a1', :display => 'Alto I'},
+  {:value => 'a2', :display => 'Alto II'},
+  {:value => 't1', :display => 'Tenor I'},
+  {:value => 't2', :display => 'Tenor II'},
+  {:value => 'b1', :display => 'Bass I'},
+  {:value => 'b2', :display => 'Bass II'}
+]
 
 class SignupForm < Bureaucrat::Forms::Form
   extend Bureaucrat::Quickfields
@@ -26,18 +43,9 @@ class SignupForm < Bureaucrat::Forms::Form
   email :email
   string :birthdate
   string :phone
-  choice :voicepart, [
-                       ['', ''],
-                       ['s1', 'Soprano I'],
-                       ['s2', 'Soprano II'],
-                       ['a1', 'Alto I'],
-                       ['a2', 'Alto II'],
-                       ['t1', 'Tenor I'],
-                       ['t2', 'Tenor II'],
-                       ['b1', 'Bass I'],
-                       ['b2', 'Bass II']
-                     ],
-          :label => "Voice Part"
+  choice :voicepart,
+         [['','']] + VOICEPARTS.collect {|vp| [vp[:value], vp[:display]]},
+         :label => "Voice Part"
   text :comments, :required => false
 end
 
@@ -128,10 +136,42 @@ post '/do_signup' do
   output
 end
 
+get /\/admin\/?/ do
+  @singers = Singer.find(:all, :conditions => "status = 'committed'")
+  @singers = @singers.sort_by {|s| s.last_name.downcase + s.first_name.downcase}
+  calculate_email_dupes
+  @part_counts = Hash.new(0)
+  @singers.each {|s| @part_counts[s.voicepart] += 1}
+  @voiceparts = VOICEPARTS
+  erb :'admin/index', :layout => :'layout_admin'
+  "Admin section not working yet"
+end
+
 get /\/(\w+)$/ do |tpl|
   erb tpl.to_sym
 end
 
-get '/admin/sample' do
-  erb :'admin/sample', :layout => :'layout_admin'
+def calculate_email_dupes
+  @email_dupes = {}
+  if !@singers.empty?
+    @singers.each do |s|
+      email = s.email.strip
+      @email_dupes[email] ||= {}
+      @email_dupes[email][:objects] ||= []
+      @email_dupes[email][:objects] << s
+    end
+    @email_dupes.delete_if {|k,v| v[:objects].size < 2}
+
+    @attrs = @singers[0].attributes.keys - %w[created_at updated_at]
+
+    @email_dupes.each do |email,val|
+      differences = {}
+      @attrs.each do |attr|
+        values = val[:objects].collect {|so| eval("so.#{attr}")}
+        differences[attr] = values if values.uniq.size > 1
+      end
+      @email_dupes[email][:differences] = differences
+    end
+    @email_dupes.delete_if {|k,v| v[:differences].has_key?('first_name')}
+  end
 end
