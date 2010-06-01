@@ -17,11 +17,17 @@ ActiveRecord::Base.establish_connection(
 )
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
-class Singer < ActiveRecord::Base;
+class Singer < ActiveRecord::Base
   def age
     age = Date.today.year - birthdate.year
     age -= 1 if Date.today.yday < birthdate.yday
     age
+  end
+end
+
+class User < ActiveRecord::Base
+  def self.authenticate(username, password)
+    User.find(:first, :conditions => {:username => username, :password => password})
   end
 end
 
@@ -47,6 +53,12 @@ class SignupForm < Bureaucrat::Forms::Form
          [['','']] + VOICEPARTS.collect {|vp| [vp[:value], vp[:display]]},
          :label => "Voice Part"
   text :comments, :required => false
+end
+
+class LoginForm < Bureaucrat::Forms::Form
+  extend Bureaucrat::Quickfields
+  string :username
+  password :password
 end
 
 helpers do
@@ -136,19 +148,59 @@ post '/do_signup' do
   output
 end
 
-get /\/admin\/?/ do
+get /\/admin\/?$/ do
+  require_login
   @singers = Singer.find(:all, :conditions => "status = 'committed'")
   @singers = @singers.sort_by {|s| s.last_name.downcase + s.first_name.downcase}
   calculate_email_dupes
   @part_counts = Hash.new(0)
   @singers.each {|s| @part_counts[s.voicepart] += 1}
   @voiceparts = VOICEPARTS
-  erb :'admin/index', :layout => :'layout_admin'
-  "Admin section not working yet"
+  erb :'admin/index', :layout => :'admin/layout'
+end
+
+get '/admin/login' do
+  @form = LoginForm.new
+  @redirect_url = params["redirect_url"]
+  erb :'admin/login', :layout => :'admin/layout'
+end
+
+post '/admin/login' do
+  user = User.authenticate(params['username'], params['password'])
+  if user
+    session["user"] = user.id
+    if params["redirect_url"]
+      redirect params["redirect_url"]
+    else
+      redirect '/admin'
+    end
+  else
+    flash[:error] = "Invalid login"
+    erb :'admin/login', :layout => 'admin/layout'
+  end
+end
+
+get '/admin/logout' do
+  session.delete "user"
+  redirect '/admin/login'
+end
+
+get '/admin/email_list' do
+  require_login
+  erb :'admin/email_list', :layout => :'admin/layout'
+end
+
+get '/admin/duplicates' do
+  require_login
+  erb :'admin/duplicates', :layout => :'admin/layout'
 end
 
 get /\/(\w+)$/ do |tpl|
   erb tpl.to_sym
+end
+
+def require_login
+  redirect "/admin/login?redirect_url=#{request.fullpath}" if session["user"].nil?
 end
 
 def calculate_email_dupes

@@ -1,9 +1,13 @@
-<% form_tag :action => "try_login" do -%>
-  <%= label_tag "username" %>
-  <%= text_field_tag "username" %><br>
-
-  <%= label_tag "password" %>
-  <%= password_field_tag "password" %><br>
-
-  <%= submit_tag "Submit" %>
+<% if flash[:error] %>
+  <div id="error-message"><%= flash[:error] %></div>
 <% end %>
+
+<form action="login" method="post">
+  <table id="login-form" class="form">
+    <%= @form.as_table %>
+  </table>
+  <% if @redirect_url %>
+    <input type="hidden" name="redirect_url" value="<%= @redirect_url %>" />
+  <% end %>
+  <input type="submit" value="Log In"/>
+</form>
