@@ -187,6 +187,8 @@ end
 
 get '/admin/email_list' do
   require_login
+  sql = "select distinct(email) from singers where status = 'committed'"
+  @email_addresses = ActiveRecord::Base.connection.select_values(sql)
   erb :'admin/email_list', :layout => :'admin/layout'
 end
 

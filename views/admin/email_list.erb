@@ -1,5 +1,3 @@
 <h2>Email List</h2>
 
-<% @email_addresses.each do |address| %>
-  <%= address %>,
-<% end %>
+<%= @email_addresses.join(", ") %>
