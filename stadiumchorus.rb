@@ -194,6 +194,8 @@ end
 
 get '/admin/duplicates' do
   require_login
+  @singers = Singer.find(:all, :conditions => {:status => 'committed'})
+  calculate_email_dupes
   erb :'admin/duplicates', :layout => :'admin/layout'
 end
 
