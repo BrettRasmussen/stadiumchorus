@@ -1,3 +1,4 @@
 tmp/*
 db/*.sl3
+db/*.sl3.*
 .*.swp
