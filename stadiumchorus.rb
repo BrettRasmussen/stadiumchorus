@@ -17,6 +17,8 @@ ActiveRecord::Base.establish_connection(
 )
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
+
+# Represents a member of the choir.
 class Singer < ActiveRecord::Base
   def age
     age = Date.today.year - birthdate.year
@@ -25,12 +27,15 @@ class Singer < ActiveRecord::Base
   end
 end
 
+# Represents an admin user.
 class User < ActiveRecord::Base
   def self.authenticate(username, password)
     User.find(:first, :conditions => {:username => username, :password => password})
   end
 end
 
+# All of the voiceparts, with nickname for storing in the database and display
+# name for showing to the end users.
 VOICEPARTS = [
   {:value => 's1', :display => 'Soprano I'},
   {:value => 's2', :display => 'Soprano II'},
@@ -42,6 +47,7 @@ VOICEPARTS = [
   {:value => 'b2', :display => 'Bass II'}
 ]
 
+# Encapsulates the necessary data to ask for on the signup form.
 class SignupForm < Bureaucrat::Forms::Form
   extend Bureaucrat::Quickfields
   string :first_name
@@ -55,6 +61,7 @@ class SignupForm < Bureaucrat::Forms::Form
   text :comments, :required => false
 end
 
+# Encapsulates the necessary data to ask for on the login page.
 class LoginForm < Bureaucrat::Forms::Form
   extend Bureaucrat::Quickfields
   string :username
@@ -86,6 +93,8 @@ helpers do
   end
 end
 
+# Shows the main index page containing all the details.  Comment out the "erb
+# :index" line in order to show the "down for maintenance" message.
 get '/' do
   <<-EOS
     <html>
@@ -104,11 +113,14 @@ get '/' do
   erb :index
 end
 
+# Show the signup form.
 get '/signup' do
   @form = SignupForm.new
   erb :signup
 end
 
+# Handles the post from the signup form, making sure the provided data is valid.
+# If something goes wrong, shows the form again but with error messages.
 post '/do_signup' do
   singer_data = {}
   Singer.column_names.each do |col| 
@@ -148,6 +160,7 @@ post '/do_signup' do
   output
 end
 
+# Shows the main admin page with the list of all the active singers.
 get /\/admin\/?$/ do
   require_login
   @singers = Singer.find(:all, :conditions => "status = 'committed'")
@@ -159,12 +172,14 @@ get /\/admin\/?$/ do
   erb :'admin/index', :layout => :'admin/layout'
 end
 
+# Shows the login form for the admin section.
 get '/admin/login' do
   @form = LoginForm.new
   @redirect_url = params["redirect_url"]
   erb :'admin/login', :layout => :'admin/layout'
 end
 
+# Handles the post from the admin login page.
 post '/admin/login' do
   user = User.authenticate(params['username'], params['password'])
   if user
@@ -180,11 +195,14 @@ post '/admin/login' do
   end
 end
 
+# Logs the admin user out.
 get '/admin/logout' do
   session.delete "user"
   redirect '/admin/login'
 end
 
+# Shows a comma-separated list of the email addresses of all members currently
+# active in the choir.
 get '/admin/email_list' do
   require_login
   sql = "select distinct(email) from singers where status = 'committed'"
@@ -192,6 +210,8 @@ get '/admin/email_list' do
   erb :'admin/email_list', :layout => :'admin/layout'
 end
 
+# Shows any duplicate entries in the singers table, with a side-by-side
+# comparison of what data is different between the entries.
 get '/admin/duplicates' do
   require_login
   @singers = Singer.find(:all, :conditions => {:status => 'committed'})
@@ -199,14 +219,20 @@ get '/admin/duplicates' do
   erb :'admin/duplicates', :layout => :'admin/layout'
 end
 
+# Shows any requested page there's a matching template for.
 get /\/(\w+)$/ do |tpl|
   erb tpl.to_sym
 end
 
+# Redirects to the login page if the requested page requires an admin session
+# and the user doesn't have one.
 def require_login
   redirect "/admin/login?redirect_url=#{request.fullpath}" if session["user"].nil?
 end
 
+# Finds any duplicates by email address and, if it finds any, removes them from
+# the @singers list and populates the @email_dupes list for use by the
+# templates.
 def calculate_email_dupes
   @email_dupes = {}
   if !@singers.empty?
