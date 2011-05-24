@@ -139,7 +139,7 @@ post '/do_signup' do
     end
     raise "Invalid form data" if !@form.valid?
     singer_data[:birthdate] = b_day
-    singer_data[:status] = "interested"
+    singer_data[:status] = "committed"
     Singer.create!(singer_data)
     erb :signup_thanks
   rescue => e
