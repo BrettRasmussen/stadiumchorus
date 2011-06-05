@@ -25,6 +25,35 @@ class Singer < ActiveRecord::Base
     age -= 1 if Date.today.yday < birthdate.yday
     age
   end
+
+  def to_contact
+    contact_attrs = {}
+    %w[first_name last_name email birthdate
+    phone comments voicepart].each do |attr|
+      contact_attrs[attr] = self.attributes[attr]
+    end
+    if self.attributes.has_key?("voicepart_id")
+      voiceparts = {1=>'s1', 2=>'s2', 3=>'a1', 4=>'a2',
+                    5=>'t1', 6=>'t2', 7=>'b1', 8=>'b2'}
+      contact_attrs["voicepart"] = voiceparts[self.voicepart_id]
+    end
+    if self.attributes.has_key?("age")
+      b_day = (Time.parse("7/4/2009") - self[:age].years).to_date
+      contact_attrs["birthdate"] = b_day
+    end
+    contact_attrs["status"] = "interested"
+    Contact.create!(contact_attrs)
+  end
+end
+
+# Represents someone on the contact list, usually a past member of the choir.
+class Contact < ActiveRecord::Base
+  validates_uniqueness_of :email
+  def age
+    age = Date.today.year - birthdate.year
+    age -= 1 if Date.today.yday < birthdate.yday
+    age
+  end
 end
 
 # Represents an admin user.
@@ -208,6 +237,16 @@ get '/admin/email_list' do
   sql = "select distinct(email) from singers where status = 'committed'"
   @email_addresses = ActiveRecord::Base.connection.select_values(sql)
   erb :'admin/email_list', :layout => :'admin/layout'
+end
+
+# Shows a comma-separated list of the email addresses of all people in the
+# contact list, excluding those currently in the list of singers.
+get '/admin/contact_list' do
+  require_login
+  sql = "select distinct(email) from contacts
+         where email not in (select distinct(email) from singers)"
+  @email_addresses = ActiveRecord::Base.connection.select_values(sql)
+  erb :'admin/contact_list', :layout => :'admin/layout'
 end
 
 # Shows any duplicate entries in the singers table, with a side-by-side

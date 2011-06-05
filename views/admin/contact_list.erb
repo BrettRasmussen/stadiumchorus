@@ -1,0 +1,6 @@
+<h2>Contact List</h2>
+
+<% @email_addresses.each_slice(442) do |addresses| %>
+  <%= addresses.join(', ') %>
+  <br/><br/>
+<% end %>
