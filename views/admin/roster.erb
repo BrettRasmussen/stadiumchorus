@@ -1,0 +1,32 @@
+<h2>Roster: <%= @voicepart.upcase %></h2>
+
+<style type="text/css">
+  th, td {
+    text-align: center;
+    padding: 2px 10px;
+  }
+  td.name {
+    text-align: left;
+  }
+</style>
+
+<table border="0">
+  <tr>
+    <th></th>
+    <th>Wednesday,<br>June 15</th>
+    <th>Saturday,<br>June 18</th>
+    <th>Wednesday,<br>June 22</th>
+    <th>Saturday,<br>June 25</th>
+    <th>Wednesday,<br>June 29</th>
+  </tr>
+  <% @singers.each do |singer| %>
+    <tr>
+      <td class="name"><%= singer.last_name %>, <%= singer.first_name %></td>
+      <td>___</td>
+      <td>___</td>
+      <td>___</td>
+      <td>___</td>
+      <td>___</td>
+    </tr>
+  <% end %>
+</table>

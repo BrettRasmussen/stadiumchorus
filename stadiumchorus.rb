@@ -249,6 +249,16 @@ get '/admin/contact_list' do
   erb :'admin/contact_list', :layout => :'admin/layout'
 end
 
+# Shows a list of people by voicepart and rehearsal dates to check off.
+get '/admin/roster' do
+  require_login
+  @voicepart = params[:voicepart]
+  @singers = Singer.find(:all,
+                         :conditions => {:voicepart => @voicepart},
+                         :order => :last_name)
+  erb :'admin/roster', :layout => :'admin/layout'
+end
+
 # Shows any duplicate entries in the singers table, with a side-by-side
 # comparison of what data is different between the entries.
 get '/admin/duplicates' do
