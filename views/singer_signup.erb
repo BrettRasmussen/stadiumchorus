@@ -1,0 +1,30 @@
+<h2>Sign Up</h2>
+
+<p>We're sorry--we have reached our quota for membership in
+the Stadium Chorus for 2011.  You may, however,
+<a href="/contact_signup">sign up for our contact list</a>
+to be contacted in future years about participation.  Thank you for your
+interest.</p>
+
+<div style="display: none">
+  <% if flash[:error] %>
+    <div id="error-message"><%= flash[:error] %></div>
+  <% end %>
+
+  <form action="/do_signup" method="post">
+    <input type="hidden" name="type" value="singer" />
+    <table id="signup-form">
+      <%= @form.as_table %>
+    </table>
+
+    <font color="red"><em>Please click this button <b>only once</b>
+    (it might take a minute):</em></font><br>
+    <input type="submit" value="Add Me" /> <strong>to the contact list</strong>
+
+    <br><br>
+
+    <p class="notice">NOTE: If anthing goes wrong with the form submission,
+    please email stadium<foo>choir<foo>@<foo>twoedge<foo>.<foo>com with a
+    precise description of what happened.</p>
+  </form>
+</div>

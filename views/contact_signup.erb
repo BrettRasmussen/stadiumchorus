@@ -1,15 +1,15 @@
-<h2>Sign Up</h2>
+<h2>Contact List</h2>
 
-<p style="color: red; display: none">NOTE: We have reached our quota for
-membership in the Stadium Chorus for 2011.  You may, however, sign up here in
-order to be contacted for participation in future years.  Thank you for your
-interest.</p>
+<p>Please fill out the form below to be added to our contact list.  You will be
+notified in future years as we begin preparations for the Stadium of Fire
+Chorus.</p>
 
 <% if flash[:error] %>
   <div id="error-message"><%= flash[:error] %></div>
 <% end %>
 
 <form action="/do_signup" method="post">
+  <input type="hidden" name="type" value="contact" />
   <table id="signup-form">
     <%= @form.as_table %>
   </table>

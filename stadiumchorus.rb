@@ -79,6 +79,7 @@ VOICEPARTS = [
 # Encapsulates the necessary data to ask for on the signup form.
 class SignupForm < Bureaucrat::Forms::Form
   extend Bureaucrat::Quickfields
+
   string :first_name
   string :last_name
   email :email
@@ -143,16 +144,18 @@ get '/' do
 end
 
 # Show the signup form.
-get '/signup' do
+get %r{/(singer|contact)_signup} do |type|
   @form = SignupForm.new
-  erb :signup
+  erb "#{type}_signup".to_sym
 end
 
 # Handles the post from the signup form, making sure the provided data is valid.
 # If something goes wrong, shows the form again but with error messages.
 post '/do_signup' do
   singer_data = {}
-  Singer.column_names.each do |col| 
+  type = params[:type]
+  klass = eval(type.titlecase)
+  klass.column_names.each do |col| 
     val = params.delete(col)
     singer_data[col.to_sym] = val if val
   end
@@ -168,9 +171,13 @@ post '/do_signup' do
     end
     raise "Invalid form data" if !@form.valid?
     singer_data[:birthdate] = b_day
-    singer_data[:status] = "committed"
-    Singer.create!(singer_data)
-    erb :signup_thanks
+
+    # TODO: During signup times, set different statuses based on signup type
+    # (singer or contact).
+    singer_data[:status] = "interested"
+
+    klass.create!(singer_data)
+    erb "#{type}_thanks".to_sym
   rescue => e
     flash[:error] = <<-EOS
       Something went wrong with your form submission:<br/>
@@ -179,7 +186,7 @@ post '/do_signup' do
       #{e.backtrace.join("\n")}
       -->
     EOS
-    erb :signup
+    erb type.to_sym
   end
   if ENV['RACK_ENV'] == 'production'
     if fork.nil?
