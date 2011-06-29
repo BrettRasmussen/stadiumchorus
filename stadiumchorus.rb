@@ -293,6 +293,7 @@ def calculate_email_dupes
   @email_dupes = {}
   if !@singers.empty?
     @singers.each do |s|
+      next if s.email.empty?
       email = s.email.strip
       @email_dupes[email] ||= {}
       @email_dupes[email][:objects] ||= []
